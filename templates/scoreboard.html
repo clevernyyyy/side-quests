@@ -1,0 +1,39 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+    About
+{% endblock %}
+
+{% block content %}
+    <h1>Scoreboard</h1>
+    <div class="scoreboard-container">
+        <table class="scoreboard">
+            <thead>
+                <tr>
+                    <th>Rank</th>
+                    <th>Username</th>
+                    <th>Terminating</th>
+                    <th>Web</th>
+                    <th>Escape Room</th>
+                    <th>Badge</th>
+                    <th>Radio</th>
+                    <th>Lockpicking</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for score in scores %}
+                <tr>
+                    <td>{{ forloop.counter }}</td> <!-- Rank -->
+                    <td>{{ score.user.username }}</td> <!-- Username -->
+                    <td>{{ score.terminating_score }}</td> <!-- Score -->
+                    <td>{{ score.web_score }}</td> <!-- Score -->
+                    <td>{{ score.escape_score }}</td> <!-- Score -->
+                    <td>{{ score.badge_score }}</td> <!-- Score -->
+                    <td>{{ score.radio_score }}</td> <!-- Score -->
+                    <td>{{ score.lockpicking_score }}</td> <!-- Score -->
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
