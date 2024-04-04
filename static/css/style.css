@@ -6,20 +6,54 @@
 
 body {
     min-height: 100vh;
-    background-color: black;
+    background-color: #ddd;
+    color: #333;
+}
+svg {
+    fill: whitesmoke;
+    margin-right: 3px;
+}
+
+.left-nav, .right-nav, nav {
+    padding: 2px 10px;
+    background-color: #b64d4d;
     color: whitesmoke;
-    font-size: 3rem;
+    display: flex;
+    flex-direction: row;
 }
 
 nav {
-    padding: 1rem;
-    background-color: #44B78B;
-    color: white;
-    font-size: 2.5rem;
+    justify-content: space-between;
+    margin-bottom: 30px;
 }
 
-main {
-    padding: 1rem;
+.jumbo-head {
+    display: flex;
+    flex-direction: row;
+}
+
+.jumbo-head-text {
+    margin-left: 20px;
+}
+
+.jumbo-header {
+    color: #477098 !important;
+    font-size: 30px;
+}
+
+.lead {
+    color: #3c68c1 !important;
+    font-size: 24px;
+
+}
+
+.sq-logo {
+    height: 100px;
+}
+
+.jumbo-text {
+    color: #333;
+    font-size: 14px;
 }
 
 section {
@@ -37,13 +71,31 @@ p {
     font-size: 1rem;
 }
 
-a {
-    text-decoration: none;
-    color: #81dbb8;
+.nav-name, a {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    padding: 8px;
+    padding: 0.5rem;
+    color: hsla(0,0%,100%,.8);
+    text-decoration: none!important;
+    text-transform: uppercase;
+    cursor: pointer;
+    font-size: 12px;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 a:hover {
-    opacity: .85;
+    /* opacity: .85; */
+    background-color: whitesmoke !important;
+    color: #b64d4d !important;
 }
 
 .banner {
@@ -92,21 +144,65 @@ a:hover {
     margin-left: 2rem;
 }
 
-.errorlist li::marker {
-    content: '🚨 ';
-}
-
-
 .logout {
-    display: inline-block;
+    display: flex;
 }
 
 .logout-button {
-    font-size: 2.5rem;
-    background-color: rgb(0, 0, 0, 0);
+    color: hsla(0,0%,100%,.8);
+    text-decoration: none!important;
+    text-transform: uppercase;
+    cursor: pointer;
+    font-size: 12px;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #b64d4d;
     border: none;
+}
+
+ol {
+    margin-left: 40px !important;
+    color: #666;
 }
 
 .logout-button:hover {
     opacity: .85;
+}
+
+/* Styles for scoreboard container */
+.scoreboard-container {
+    margin-top: 20px;
+}
+
+/* Basic table styling */
+.scoreboard {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #f9f9f9;
+}
+
+.scoreboard th, .scoreboard td {
+    padding: 12px;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+/* Alternate row coloring */
+.scoreboard tbody tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+/* Hover effect on rows */
+.scoreboard tbody tr:hover {
+    background-color: #ddd;
+}
+
+/* Style for table header */
+.scoreboard th {
+    background-color: #4CAF50;
+    color: white;
+}
+
+/* Style for table header on hover */
+.scoreboard th:hover {
+    background-color: #45a049;
 }

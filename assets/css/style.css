@@ -144,11 +144,6 @@ a:hover {
     margin-left: 2rem;
 }
 
-.errorlist li::marker {
-    content: '🚨 ';
-}
-
-
 .logout {
     display: flex;
 }
