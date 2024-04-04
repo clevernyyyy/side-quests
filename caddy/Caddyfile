@@ -1,0 +1,7 @@
+{
+    email jeris.rue@gmail.com
+}
+
+side-quests.kernelcon.org {
+    reverse_proxy http://web:8000
+}

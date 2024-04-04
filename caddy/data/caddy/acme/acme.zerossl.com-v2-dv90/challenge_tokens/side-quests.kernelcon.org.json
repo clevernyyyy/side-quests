@@ -1,0 +1,1 @@
+{"type":"http-01","url":"https://acme.zerossl.com/v2/DV90/chall/CMbNd5FAa82iIh9C1HdhKw","status":"pending","token":"03zLdV7NNh3o07tVcWJ7X3CXa2VdQyXNbeYuRbDRCrw","keyAuthorization":"03zLdV7NNh3o07tVcWJ7X3CXa2VdQyXNbeYuRbDRCrw.yFRcIWVeD3kh94xiZhT9AL5UI_ZEaksS1kTi056zNik","identifier":{"type":"dns","value":"side-quests.kernelcon.org"}}

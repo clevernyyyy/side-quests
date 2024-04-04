@@ -1,6 +1,19 @@
 version: '3'
 
 services:
+  caddy:
+    image: caddy
+    ports:
+      - "80:80"
+      - "443:443"
+    networks:
+      - caddy-net
+    volumes:
+      - ./caddy/data/:/data/
+      - ./caddy/config/:/config/
+      - ./caddy/Caddyfile:/etc/caddy/Caddyfile
+    restart: unless-stopped
+
   web:
     build: .
     command: python manage.py runserver 0.0.0.0:8000
@@ -10,6 +23,9 @@ services:
       - "8000:8000"
     depends_on:
       - db
+    restart: unless-stopped
+    networks:
+      - caddy-net
 
   db:
     image: postgres
@@ -17,4 +33,9 @@ services:
       POSTGRES_DB: side_quests_db
       POSTGRES_USER: side_quests_user
       POSTGRES_PASSWORD: V7RdwnwM0tBwPJ7jXhoK
+    restart: unless-stopped
+    networks:
+      - caddy-net
 
+networks:
+  caddy-net:

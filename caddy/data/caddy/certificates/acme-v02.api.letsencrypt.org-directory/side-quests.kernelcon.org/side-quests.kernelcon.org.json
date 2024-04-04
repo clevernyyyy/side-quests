@@ -1,0 +1,9 @@
+{
+	"sans": [
+		"side-quests.kernelcon.org"
+	],
+	"issuer_data": {
+		"url": "https://acme-v02.api.letsencrypt.org/acme/cert/035705aa9e85c3482ec69789125b48c4501a",
+		"ca": "https://acme-v02.api.letsencrypt.org/directory"
+	}
+}
