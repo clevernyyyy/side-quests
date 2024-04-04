@@ -93,7 +93,9 @@ p {
 }
 
 a:hover {
-    opacity: .85;
+    /* opacity: .85; */
+    background-color: whitesmoke !important;
+    color: #b64d4d !important;
 }
 
 .banner {
@@ -160,6 +162,11 @@ a:hover {
     font-family: Arial, Helvetica, sans-serif;
     background-color: #b64d4d;
     border: none;
+}
+
+ol {
+    margin-left: 40px !important;
+    color: green;
 }
 
 .logout-button:hover {

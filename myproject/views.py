@@ -1,16 +1,15 @@
 # from django.http import HttpResponse
 from django.shortcuts import render
-
+from scoreboard.models import Score
 
 def homepage(request):
-    # return HttpResponse("Hello World! I'm Home.")
     return render(request, 'home.html')
 
 
 def about(request):
-    # return HttpResponse("My About page.")
     return render(request, 'about.html')
 
 
 def scoreboard(request):
-    return render(request, 'scoreboard.html')
+    scores = Score.objects.all().order_by('-computed_score', 'terminating_score')
+    return render(request, 'scoreboard.html', {'scores': scores})
