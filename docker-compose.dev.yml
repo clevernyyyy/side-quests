@@ -1,0 +1,55 @@
+services:
+  django:
+    build:
+      context: .
+      dockerfile: Dockerfile-dev
+    image: scoreboard_django_dev
+    container_name: django
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+      # for ptvsd django debugging
+      - "3456:3456"
+    volumes:
+      - .:/app
+    command: bash -c "python3 manage.py migrate && python3 manage.py runserver 0.0.0.0:8000"
+    env_file:
+      - ./.env.dev
+    depends_on:
+      - postgres
+      - redis
+
+  react:
+    # image: openai-demo-app
+    container_name: react
+    restart: unless-stopped
+    build:
+      context: ./client
+      dockerfile: Dockerfile-dev
+    image: scoreboard_react_dev
+    volumes:
+        - ./:/app
+    ports:
+      - "5173:5173"
+    depends_on:
+      - django
+
+  redis:
+    image: redis:7.4.2
+    container_name: redis
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+
+  postgres:
+    image: postgres:17.2
+    container_name: postgres
+    restart: unless-stopped
+    volumes:
+      - postgres_data_dev:/var/lib/postgresql/data/
+    env_file:
+      - ./.env.dev
+
+
+volumes:
+  postgres_data_dev:

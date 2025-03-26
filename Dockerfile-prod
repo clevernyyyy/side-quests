@@ -1,0 +1,71 @@
+##################
+# CLIENT BUILDER #
+##################
+
+FROM node:22 AS react-builder
+
+WORKDIR /app/client
+COPY ./client/package*.json ./
+RUN npm install
+COPY ./client .
+
+RUN npm run build
+
+
+##################
+# SERVER BUILDER #
+##################
+
+FROM python:3.12 AS server-builder
+
+# set work directory
+WORKDIR /app
+
+# set environment variables
+ENV PYTHONUNBUFFERED 1
+
+# Copy the current directory contents into the container at /app
+COPY . /app/
+
+# install dependencies
+COPY requirements.common.txt /app/
+RUN pip wheel --no-cache-dir --no-deps --wheel-dir /app/wheels -r requirements.common.txt
+
+
+#########
+# FINAL #
+#########
+
+# pull official base image
+FROM python:3.12 AS run
+
+# create directory for the app user
+RUN mkdir -p /home/app
+
+# create the app user
+RUN addgroup --system app && adduser --system app && adduser app app
+
+# create the appropriate directories
+ENV HOME=/home/app
+ENV APP_HOME=/home/app/scoreboard
+RUN mkdir $APP_HOME
+RUN mkdir $APP_HOME/static
+WORKDIR $APP_HOME
+
+# install dependencies
+COPY --from=server-builder /app/wheels /wheels
+COPY --from=server-builder /app/requirements.common.txt ./
+RUN pip install --no-cache /wheels/*
+
+# copy project
+COPY . $APP_HOME
+
+# copy static front end files
+COPY --from=react-builder /app/client/staticfiles/ ./staticfiles/
+
+# chown all the files to the app user
+RUN chown -R app:app $APP_HOME
+
+# change to the app user
+# Need to set to non-root user in prod (needs to match actual user on host)
+USER app

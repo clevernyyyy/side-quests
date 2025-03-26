@@ -1,0 +1,23 @@
+{% load django_vite %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/static/images/k25logo-black.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{% block title %}Side Quests{% endblock %}</title>
+
+    <!-- styles here -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  </head>
+  <body>
+    {% block content %}
+    {% endblock %}
+
+    <!-- scripts here -->
+    {% vite_hmr_client %}
+    {% vite_react_refresh %}
+    {% vite_asset 'src/main.jsx' %}
+  </body>
+</html>

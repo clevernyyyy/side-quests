@@ -1,6 +1,8 @@
 from django.shortcuts import render
-from .models import Score
+from django.contrib.admin.views.decorators import staff_member_required
 
-def scoreboard(request):
-    scores = Score.objects.all().order_by('-computed_score')
-    return render(request, 'scoreboard/scoreboard.html', {'scores': scores})
+
+# Create your views here.
+def index(request):
+
+    return render(request, "index.html")
