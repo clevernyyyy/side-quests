@@ -1,0 +1,11 @@
+#scoreboard front end
+node_modules
+
+
+#dont commit env files
+.env.dev
+.env.prod
+Caddyfile
+
+# temp old
+**/old/
