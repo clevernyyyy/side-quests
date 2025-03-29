@@ -194,3 +194,8 @@ def immutable_file_test(path, url):
     return re.match(r"^.+[.-][0-9a-zA-Z_-]{8,12}\..+$", url)
 
 WHITENOISE_IMMUTABLE_FILE_TEST = immutable_file_test
+
+
+# badge leaderboard settings
+BADGE_LEADERBOARD_BASE_URL = os.environ.get("BADGE_LEADERBOARD_BASE_URL")
+BADGE_LEADERBOARD_API_TOKEN = os.environ.get("BADGE_LEADERBOARD_API_TOKEN")

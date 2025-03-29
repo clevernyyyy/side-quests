@@ -10,3 +10,4 @@ celery==5.4.0
 django-celery-beat==2.7.0
 flower==2.0.1
 whitenoise==6.9.0
+requests==2.32.3
