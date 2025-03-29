@@ -28,7 +28,7 @@ def calculate_score(sender, instance, created, **kwargs):
 
 class Badge(models.Model):
     machine_id = models.CharField(unique=True)
-    initials = models.CharField(unique=True)
+    initials = models.CharField(null=True, blank=True)
     deep_easy_hs = models.FloatField(null=True, blank=True)
     deep_easy_win_count = models.IntegerField(null=True, blank=True)
     deep_easy_fail_count = models.IntegerField(null=True, blank=True)
