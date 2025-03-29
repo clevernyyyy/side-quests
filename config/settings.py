@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'ninja',
     "rest_framework",
     'channels',
     'corsheaders',
@@ -173,6 +174,9 @@ DJANGO_VITE = {
 # For example: 'DJANGO_CSRF_TRUSTED_ORIGINS=https://localhost https://127.0.0.1'
 CSRF_TRUSTED_ORIGINS = os.environ.get("DJANGO_CSRF_TRUSTED_ORIGINS").split(" ")
 
+CORS_ALLOW_ALL_ORIGINS = DEBUG
+CORS_ALLOW_CREDENTIALS = True
+CORS_ALLOWED_ORIGINS = os.environ.get("DJANGO_CSRF_TRUSTED_ORIGINS").split(" ")
 
 # Celery Settings
 CELERY_BROKER_URL = 'redis://redis:6379/0'  # or your broker URL
@@ -199,3 +203,6 @@ WHITENOISE_IMMUTABLE_FILE_TEST = immutable_file_test
 # badge leaderboard settings
 BADGE_LEADERBOARD_BASE_URL = os.environ.get("BADGE_LEADERBOARD_BASE_URL")
 BADGE_LEADERBOARD_API_TOKEN = os.environ.get("BADGE_LEADERBOARD_API_TOKEN")
+
+
+AUTH_USER_MODEL = 'scoreboard.CustomUser'
