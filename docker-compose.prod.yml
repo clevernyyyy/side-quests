@@ -32,6 +32,58 @@ services:
       - postgres
       - redis
 
+
+  celery:
+    build:
+      context: .
+      dockerfile: Dockerfile-prod
+    image: scoreboard_celery_prod
+    container_name: celery
+    restart: unless-stopped
+    user: app
+    command: ["celery", "-A", "config", "worker", "--loglevel=info"]
+    env_file:
+      - ./.env.prod
+    depends_on:
+      - postgres
+      - redis
+      - django
+
+  celerybeat:
+    build:
+      context: .
+      dockerfile: Dockerfile-prod
+    image: scoreboard_celerybeat_prod
+    container_name: celerybeat
+    restart: unless-stopped
+    user: app
+    command: ["celery", "-A", "config", "beat", "--loglevel=info", "--scheduler", "django_celery_beat.schedulers:DatabaseScheduler"]
+    env_file:
+      - ./.env.prod
+    depends_on:
+      - postgres
+      - redis
+      - django
+
+  flower:
+    build:
+      context: .
+      dockerfile: Dockerfile-prod
+    image: scoreboard_flower_prod
+    container_name: flower
+    restart: unless-stopped
+    ports:
+      - 5555:5555
+    user: app
+    command: ["celery", "-A", "config", "--broker=redis://redis:6379/0", "flower"]
+    env_file:
+      - ./.env.prod
+    depends_on:
+      - postgres
+      - redis
+      - django
+
+
   redis:
     image: redis:7.4.2
     container_name: redis

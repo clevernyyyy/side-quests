@@ -35,6 +35,7 @@ ALLOWED_HOSTS = os.environ.get("DJANGO_ALLOWED_HOSTS").split(" ")
 # Application definition
 
 INSTALLED_APPS = [
+    'django_celery_beat',
     'daphne',
     'django_vite',
     'scoreboard',
@@ -171,6 +172,18 @@ DJANGO_VITE = {
 # 'DJANGO_CSRF_TRUSTED_ORIGINS' should be a single string of hosts with scheme and a space between each.
 # For example: 'DJANGO_CSRF_TRUSTED_ORIGINS=https://localhost https://127.0.0.1'
 CSRF_TRUSTED_ORIGINS = os.environ.get("DJANGO_CSRF_TRUSTED_ORIGINS").split(" ")
+
+
+# Celery Settings
+CELERY_BROKER_URL = 'redis://redis:6379/0'  # or your broker URL
+CELERY_RESULT_BACKEND = 'redis://redis:6379/0'  # or your result backend
+CELERY_ACCEPT_CONTENT = ['json']
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_RESULT_SERIALIZER = 'json'
+CELERY_TIMEZONE = 'America/Chicago'  # or your timezone
+
+# For django-celery-beat
+CELERY_BEAT_SCHEDULER = 'django_celery_beat.schedulers:DatabaseScheduler'
 
 
 # Whitenoise cache-control bug fix

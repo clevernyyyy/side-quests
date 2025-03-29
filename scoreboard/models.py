@@ -25,3 +25,24 @@ def calculate_score(sender, instance, created, **kwargs):
         else:
             instance.computed_score = instance.web_score + instance.escape_score + instance.badge_score + instance.radio_score + instance.lockpicking_score
         instance.save()
+
+class Badge(models.Model):
+    machine_id = models.CharField(unique=True)
+    initials = models.CharField(unique=True)
+    deep_easy_hs = models.FloatField(null=True, blank=True)
+    deep_easy_win_count = models.IntegerField(null=True, blank=True)
+    deep_easy_fail_count = models.IntegerField(null=True, blank=True)
+    deep_norm_hs = models.FloatField(null=True, blank=True)
+    deep_norm_win_count = models.IntegerField(null=True, blank=True)
+    deep_norm_fail_count = models.IntegerField(null=True, blank=True)
+    deep_hard_hs = models.FloatField(null=True, blank=True)
+    deep_hard_win_count = models.IntegerField(null=True, blank=True)
+    deep_hard_fail_count = models.IntegerField(null=True, blank=True)
+    deep_official_hs = models.FloatField(null=True, blank=True)
+    deep_official_win_count = models.IntegerField(null=True, blank=True)
+    deep_official_fail_count = models.IntegerField(null=True, blank=True)
+    added = models.DateTimeField(null=True, blank=True)
+    updated = models.DateTimeField(null=True, blank=True)
+
+    def __str__(self):
+        return self.machine_id
