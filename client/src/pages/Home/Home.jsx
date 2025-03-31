@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom'
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { Banner } from '../../components/Banner/Banner';
@@ -33,11 +34,12 @@ function Home() {
       </Row>
       <Row className='my-4'>
         <Col xs={12} lg={{ span: 8, offset: 2 }}>
-          <RecentUploads data={data} />
+          {/* <RecentUploads data={data} /> */}
+          <h1>test</h1>
         </Col>
       </Row>
     </>
   )
 }
 
-export default Home
+export default Home;

@@ -3,7 +3,7 @@ import useWebSocket, { ReadyState } from 'react-use-websocket';
 import { HashRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import './App.css';
 import { Layout } from './Layout';
-import { Home } from './pages/Home/Home';
+import Home from './pages/Home/Home';
 import Login from './pages/Login/Login.jsx'
 import Register from './pages/Register/Register.jsx'
 

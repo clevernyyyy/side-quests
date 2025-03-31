@@ -9,7 +9,7 @@ export const useAuthStore = create(
 
       setCsrfToken: async () => {
         const response = await fetch(
-          'http://localhost:8000/api/set-csrf-token',
+          location.host + '/api/set-csrf-token',
           {
             method: 'GET',
             credentials: 'include',
@@ -21,7 +21,7 @@ export const useAuthStore = create(
 
       login: async (email, password) => {
         const csrftoken = await get().setCsrfToken()
-        const response = await fetch('http://localhost:8000/api/login', {
+        const response = await fetch(location.host + '/api/login', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -51,7 +51,7 @@ export const useAuthStore = create(
       logout: async () => {
         try {
           const csrftoken = await get().setCsrfToken()
-          const response = await fetch('http://localhost:8000/api/logout', {
+          const response = await fetch(location.host + '/api/logout', {
             method: 'POST',
             headers: {
               'X-CSRFToken': csrftoken,
@@ -73,7 +73,7 @@ export const useAuthStore = create(
       fetchUser: async () => {
         try {
           const csrftoken = await get().setCsrfToken()
-          const response = await fetch('http://localhost:8000/api/user', {
+          const response = await fetch(location.host + '/api/user', {
             credentials: 'include',
             headers: {
               'Content-Type': 'application/json',
