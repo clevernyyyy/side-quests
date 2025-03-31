@@ -4,6 +4,8 @@ import { HashRouter as Router, Routes, Route, Navigate } from 'react-router-dom'
 import './App.css';
 import { Layout } from './Layout';
 import { Home } from './pages/Home/Home';
+import Login from './pages/Login/Login.jsx'
+import Register from './pages/Register/Register.jsx'
 
 
 function App() {
@@ -136,6 +138,8 @@ function App() {
       <Routes>
         <Route element={<Layout theme={theme} toggleTheme={toggleTheme} connectionStatus={connectionStatus} />} >
           <Route path="/" element={<Home data={data} />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
         </Route>
       </Routes>
     </Router>

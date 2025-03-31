@@ -1,15 +1,27 @@
 import React, { useState, useEffect } from 'react';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-
-import './Home.css';
-
 import { Banner } from '../../components/Banner/Banner';
 import { RecentUploads } from '../../components/RecentUploads/RecentUploads';
+import { useAuthStore } from '../../store/authStore'
+import './Home.css';
 
+function Home() {
+  const { isAuthenticated, user, logout, fetchUser } = useAuthStore()
+  const navigate = useNavigate()
 
-export function Home({ data }) {
+  useEffect(() => {
+    void fetchUser()
+  }, [fetchUser])
 
+  const handleLogout = async () => {
+    try {
+      await logout()
+      navigate('/login')
+    } catch (error) {
+      console.error(error)
+    }
+  }
 
   return (
     <>
@@ -24,9 +36,8 @@ export function Home({ data }) {
           <RecentUploads data={data} />
         </Col>
       </Row>
-      
     </>
-
   )
-
 }
+
+export default Home
