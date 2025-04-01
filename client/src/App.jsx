@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import useWebSocket, { ReadyState } from 'react-use-websocket';
-import { HashRouter as Router, Routes, Route } from 'react-router-dom';
+import { HashRouter as Router, Routes, Route, Navigate, useNavigate } from 'react-router-dom';
 import './App.css';
 import { Layout } from './Layout';
 import Home from './pages/Home/Home';
 import Login from './pages/Login/Login.jsx'
 import Register from './pages/Register/Register.jsx'
+import { useAuthStore } from './store/authStore'
 
 function App() {
+  const { isAuthenticated, user, logout, fetchUser } = useAuthStore()
   const [theme, setTheme] = useState('light');
   
   // toggle dark mode
@@ -129,11 +131,17 @@ function App() {
     }
   }, [messageHistory, data])
 
+  const PrivateRoute = ({ children }) => {
+    const navigate = useNavigate();
+    return isAuthenticated ? children : <Navigate to="/login" replace />;
+  };
+
   return (
     <Router>
       <Routes>
         <Route element={<Layout theme={theme} toggleTheme={toggleTheme} connectionStatus={connectionStatus} />} >
-          <Route path="/" element={<Home data={data} />} />
+          <Route path="/" 
+            element={<PrivateRoute>{<Home data={data} />}</PrivateRoute>} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
         </Route>

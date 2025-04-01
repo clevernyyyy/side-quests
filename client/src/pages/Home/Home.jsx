@@ -34,8 +34,8 @@ function Home() {
       </Row>
       <Row className='my-4'>
         <Col xs={12} lg={{ span: 8, offset: 2 }}>
+          <h2>hi</h2>
           {/* <RecentUploads data={data} /> */}
-          <h1>test</h1>
         </Col>
       </Row>
     </>
