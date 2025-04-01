@@ -1,20 +1,25 @@
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-import NavDropdown from 'react-bootstrap/NavDropdown';
-import Button from 'react-bootstrap/Button';
-import Form from 'react-bootstrap/Form';
-
 import { Link } from 'react-router-dom';
-
 import './Navigation.css';
-
+import { useAuthStore } from '../../store/authStore'
 
 export function Navigation({ connectionStatus, theme, toggleTheme }) {
+    const { isAuthenticated, user, logout } = useAuthStore()
+
+    const handleLogout = async () => {
+        try {
+          await logout()
+          navigate('/#/login')
+        } catch (error) {
+          console.error(error)
+        }
+      }
+
     return (
         <Navbar expand="lg" className="bg-body-tertiary">
             <Container>
-            {/* <Navbar.Brand href="#/">React-Bootstrap</Navbar.Brand> */}
             <Navbar.Brand href="#">
             {theme === "dark" ? (
                 <img
@@ -36,23 +41,11 @@ export function Navigation({ connectionStatus, theme, toggleTheme }) {
             </Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
-                <Nav className="me-auto">
-                    <Nav.Link as={Link} to="/" exact>Home</Nav.Link>
-                    <Nav.Link as={Link} to="/nope" exact>DoesntExist</Nav.Link>
-                    <div className="vr my-2 mx-3 d-none d-lg-block"></div>
-                    <hr className="mx-3 d-block d-lg-none"/>
-                    {/* <Nav.Link href="https://badge.kernelcon.org/">Badge Website</Nav.Link> */}
-                    <Navbar.Text>The WebSocket is currently: {connectionStatus}</Navbar.Text>
+                <Nav className="me-auto justify-content-end" style={{ width: "100%" }}>
+                    {isAuthenticated && user && <Navbar.Text>{`Welcome ${user.username}`}</Navbar.Text>}
+                    {isAuthenticated && <div className="vr my-2 mx-3 d-none d-lg-block"></div>}
+                    {isAuthenticated && <Nav.Link as={Link} onClick={handleLogout}>LogOut</Nav.Link>}
                 </Nav>
-                <Form className="justify-content-end">
-                    <Form.Check // prettier-ignore
-                        type="switch"
-                        id="custom-switch"
-                        // label="Dark Mode"
-                        onChange={toggleTheme}
-                        checked={theme === "dark"}
-                    />
-                </Form>
             </Navbar.Collapse>
             </Container>
         </Navbar>

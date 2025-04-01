@@ -9,7 +9,7 @@ import Register from './pages/Register/Register.jsx'
 import { useAuthStore } from './store/authStore'
 
 function App() {
-  const { isAuthenticated, user, logout, fetchUser } = useAuthStore()
+  const { isAuthenticated } = useAuthStore()
   const [theme, setTheme] = useState('light');
   
   // toggle dark mode

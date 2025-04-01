@@ -4,7 +4,6 @@ import { Navigation } from "./components/Navigation/Navigation";
 import Container from 'react-bootstrap/Container';
 
 export function Layout({ connectionStatus, theme, toggleTheme }) {
-// export function Layout() {
     return (
         <Container fluid className="gx-0">
             <Navigation connectionStatus={connectionStatus} theme={theme} toggleTheme={toggleTheme} />
