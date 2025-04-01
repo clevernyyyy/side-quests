@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import useWebSocket, { ReadyState } from 'react-use-websocket';
-import { HashRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { HashRouter as Router, Routes, Route } from 'react-router-dom';
 import './App.css';
 import { Layout } from './Layout';
 import Home from './pages/Home/Home';
 import Login from './pages/Login/Login.jsx'
 import Register from './pages/Register/Register.jsx'
-
 
 function App() {
   const [theme, setTheme] = useState('light');
@@ -127,11 +126,8 @@ function App() {
         console.error("Unknown action in message received via websocket. Printing message:");
         console.error(allData);
       }
-
     }
-
   }, [messageHistory, data])
-
 
   return (
     <Router>
@@ -145,7 +141,6 @@ function App() {
     </Router>
 
   );
-
 }
 
 export default App
