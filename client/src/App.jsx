@@ -9,7 +9,7 @@ import Register from './pages/Register/Register.jsx'
 import { useAuthStore } from './store/authStore'
 
 function App() {
-  const { isAuthenticated } = useAuthStore()
+  const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
   const [theme, setTheme] = useState('light');
   
   // toggle dark mode
@@ -147,7 +147,6 @@ function App() {
         </Route>
       </Routes>
     </Router>
-
   );
 }
 

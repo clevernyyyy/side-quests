@@ -7,7 +7,8 @@ import { useAuthStore } from '../../store/authStore'
 
 export function Navigation({ connectionStatus, theme, toggleTheme }) {
     const { isAuthenticated, user, logout } = useAuthStore()
-
+    const navigate = useNavigate()
+    
     const handleLogout = async () => {
         try {
           await logout()
@@ -24,7 +25,6 @@ export function Navigation({ connectionStatus, theme, toggleTheme }) {
             {theme === "dark" ? (
                 <img
                     src='static/images/k25-white.png'
-                    // width="30"
                     height="30"
                     className="d-inline-block align-top"
                     alt="Kernelcon 2025"
@@ -32,7 +32,6 @@ export function Navigation({ connectionStatus, theme, toggleTheme }) {
             ) : (
                 <img
                     src='static/images/k25-black.png'
-                    // width="30"
                     height="30"
                     className="d-inline-block align-top"
                     alt="Kernelcon 2025"
