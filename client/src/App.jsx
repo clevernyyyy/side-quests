@@ -7,6 +7,7 @@ import Home from './pages/Home/Home';
 import Login from './pages/Login/Login.jsx'
 import Register from './pages/Register/Register.jsx'
 import { useAuthStore } from './store/authStore'
+import BadgeSync from './pages/BadgeSync/BadgeSync.jsx';
 
 function App() {
   const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
@@ -144,6 +145,7 @@ function App() {
             element={<PrivateRoute>{<Home data={data} />}</PrivateRoute>} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/sync" element={<BadgeSync />} />
         </Route>
       </Routes>
     </Router>

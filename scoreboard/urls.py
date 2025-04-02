@@ -6,6 +6,8 @@ from . import views
 
 urlpatterns = [
     path("", views.index, name="index"),
+    path("badgesync/", views.badge_sync, name="badge_sync"),
+    # re_path(r"^badgesync/(?P<id>[a-z0-9]{16})$", views.badge_sync, name="badge_sync"),
     # re_path(r'^viewstatic/(?P<path>.*)$', 
     #     serve,
     #     {

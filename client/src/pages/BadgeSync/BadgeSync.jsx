@@ -1,33 +1,32 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useNavigate, useSearchParams } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+import { useSearchParams } from 'react-router-dom';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import Alert from 'react-bootstrap/Alert';
 import { Banner } from '../../components/Banner/Banner';
 import { RecentUploads } from '../../components/RecentUploads/RecentUploads';
 import { useAuthStore } from '../../store/authStore'
 import ContextualToast from '../../components/ContextualToast/ContextualToast';
+import Button from 'react-bootstrap/Button';
 
-import './Home.css';
+import './BadgeSync.css';
 
-function Home() {
+
+function BadgeSync() {
   const [searchParams, setSearchParams] = useSearchParams();
   const [dataParam, setDataParam] = useState('');
   const [showToast, setShowToast] = useState(false);
-  const { isAuthenticated, user, logout, fetchUser } = useAuthStore()
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   useEffect(() => {
-    void fetchUser()
-  }, [fetchUser])
+    const timer = setTimeout(() => {
+    //   setRedirecting(false);
+      navigate("/#/");
+    }, 6000);
 
-  const handleLogout = async () => {
-    try {
-      await logout()
-      navigate('/#/login')
-    } catch (error) {
-      console.error(error)
-    }
-  }
+    return () => clearTimeout(timer);
+  }, [navigate]);
 
   useEffect(() => {
     // const params = useSearchParams();
@@ -55,33 +54,28 @@ function Home() {
 
   return (
     <>
-      <Banner />
-      <Row className="text-center">
-        <Col xs={12}>
-          <h3>Home Page</h3>
-        </Col>
-      </Row>
-      <Row className='my-4'>
-        <Col xs={12} lg={{ span: 8, offset: 2 }}>
-          <h2>hi</h2>
-          {/* <RecentUploads data={data} /> */}
-        </Col>
-      </Row>
+            {/* toast display from badge sync */}
+            {dataParam ? (
+                dataParam.error ? (
+                    <ContextualToast showToast={showToast} toggleShowToast={toggleShowToast} variant="danger" message={dataParam.error} />
+                ) : (
+                    dataParam.success ? (
+                        <ContextualToast showToast={showToast} toggleShowToast={toggleShowToast} variant="secondary" message={dataParam.success} />
+                    ) : (
+                        // no success or error
+                        <></>
+                    )
+                )
+            
+            ) : (
+                // no data params sent
+                <></>
+            )}
 
-      {/* toast display from badge sync */}
-      {dataParam ? (
-          dataParam.success ? (
-              <ContextualToast showToast={showToast} toggleShowToast={toggleShowToast} variant="secondary" message={dataParam.success} />
-          ) : (
-              // no success or error
-              <></>
-          )      
-      ) : (
-          // no data params sent
-          <></>
-      )}
+        {/* </Col>
+      </Row> */}
     </>
   )
 }
 
-export default Home;
+export default BadgeSync;
