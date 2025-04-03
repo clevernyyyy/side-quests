@@ -72,14 +72,15 @@ def transfer_official_hs_to_score_table():
         # iterate through each score record
         
         # look up badge for this score record's user
-        badge = Badge.objects.get(pk=score.user.badge.pk)
+	if score.user.badge.pk is not None:
+            badge = Badge.objects.get(pk=score.user.badge.pk)
 
-        # set official hs to score instance badge_score
-        if badge.deep_official_hs is not None:
-            score.badge_score = badge.deep_official_hs
+            # set official hs to score instance badge_score
+            if badge.deep_official_hs is not None:
+                score.badge_score = badge.deep_official_hs
 
-        # save score record
-        score.save()
+                # save score record
+                score.save()
 
 
     
