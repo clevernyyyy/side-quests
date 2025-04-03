@@ -9,7 +9,7 @@ import ContextualToast from '../../components/ContextualToast/ContextualToast';
 
 import './Home.css';
 
-function Home() {
+function Home({ data }) {
   const [searchParams, setSearchParams] = useSearchParams();
   const [dataParam, setDataParam] = useState('');
   const [showToast, setShowToast] = useState(false);
@@ -56,15 +56,9 @@ function Home() {
   return (
     <>
       <Banner />
-      <Row className="text-center">
-        <Col xs={12}>
-          <h3>Home Page</h3>
-        </Col>
-      </Row>
       <Row className='my-4'>
         <Col xs={12} lg={{ span: 8, offset: 2 }}>
-          <h2>hi</h2>
-           <RecentUploads data={dataParam} /> 
+           <RecentUploads data={data} /> 
         </Col>
       </Row>
 

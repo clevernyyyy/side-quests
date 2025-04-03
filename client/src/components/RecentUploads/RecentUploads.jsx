@@ -8,20 +8,16 @@ import Table from 'react-bootstrap/Table';
 import './RecentUploads.css';
 import { RecentUploadsItem } from '../RecentUploadsItem/RecentUploadsItem';
 
-
-
 export function RecentUploads({ data }) {
     const [recentUploads, setRecentUploads] = useState('');
+    console.log(data);
 
-    useEffect( () => {
-        
+    useEffect(() => {        
         if (data.length) {
             const numberToDisplay = 5;
             let sortedDataByNew = [...data];
 
-            // console.log("orig");
-            // console.log(data);      
-
+            console.log(sortedDataByNew);
 
             // sort by newest first
             sortedDataByNew.sort((a, b) => new Date(b.updated) - new Date(a.updated));
@@ -44,13 +40,11 @@ export function RecentUploads({ data }) {
     
       }, [data])
 
-
-  
     if (recentUploads.length) {
         return (
             <>                
                 <Card>
-                    <Card.Header as="h4" className="text-center">Most Recent Uploads</Card.Header>
+                    <Card.Header as="h4" className="text-center">Top Side Quest Scores</Card.Header>
                     <Table className='mb-0'striped responsive>
                         <thead>
                             <tr>
@@ -74,7 +68,7 @@ export function RecentUploads({ data }) {
         return (
             <>
                 <Card as="h4" className="text-center">
-                    <Card.Header>Most Recent Uploads</Card.Header>
+                    <Card.Header>Top Side Quest Scores</Card.Header>
                     <ListGroup variant='flush'>        
                         <ListGroup.Item>None</ListGroup.Item>
                     </ListGroup>

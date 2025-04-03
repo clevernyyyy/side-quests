@@ -86,8 +86,7 @@ function App() {
 
       let allData;
       allData = JSON.parse(oldestMessage.data);
-      console.log('allData');
-      console.log(allData);
+      console.log('allData', allData);
 
       if (allData.action === "list") {
         // console.log("list");

@@ -12,7 +12,7 @@ export function Navigation({ connectionStatus, theme, toggleTheme }) {
     const handleLogout = async () => {
         try {
           await logout()
-          navigate('/#/login')
+          navigate('/login')
         } catch (error) {
           console.error(error)
         }
@@ -21,7 +21,7 @@ export function Navigation({ connectionStatus, theme, toggleTheme }) {
     return (
         <Navbar expand="lg" className="bg-body-tertiary">
             <Container>
-            <Navbar.Brand href="#">
+            <Navbar.Brand href="/">
             {theme === "dark" ? (
                 <img
                     src='static/images/k25-white.png'
