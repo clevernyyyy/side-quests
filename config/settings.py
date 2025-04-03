@@ -163,7 +163,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # debug True will send any requests for vite generated files to the vite webserver at the below ip/fqdn
 DJANGO_VITE = {
   "default": {
-    "dev_mode": False,
+    "dev_mode": DEBUG,
     "dev_server_host": os.environ.get("FQDN_OR_IP_WHERE_HOSTED")
   }
 }
