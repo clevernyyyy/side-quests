@@ -4,7 +4,7 @@ from django.conf import settings
 from django.db.models import Sum
 from django.db.models.functions import Coalesce
 from django.core.exceptions import ValidationError, ObjectDoesNotExist
-from .models import Badge, Score
+from .models import Badge, Score, CustomUser
 
 import requests
 
@@ -64,7 +64,7 @@ def sync_badge_scores():
             print(f"Error saving model: {e}")
 
 @shared_task
-def transfer_official_hs_to_score_table():
+def transfer_official_hs_to_score_table_old():
     # pull all score instances and associated user's badge
     scores = Score.objects.all()
 
@@ -81,3 +81,35 @@ def transfer_official_hs_to_score_table():
 
                 # save score record
                 score.save()
+
+@shared_task
+def transfer_official_hs_to_score_table():
+    #pull all users
+    users = CustomUser.objects.all()
+
+    #loop through users
+    for user in users:
+
+        #if user have badge?
+        if user.badge is not None:
+
+            #if user has score, update it else, create new score
+            try:
+                score = Score.objects.get(user=score.user)
+                # score exists
+
+                #set official hs to score instance badge_score
+                if user.badge.deep_official_hs is not None:
+                    score.badge_score = user.badge.deep_official_hs
+
+            except ObjectDoesNotExist:
+                #score doesn't exist.  create new
+                try:
+                    model_instance = Score()
+                    model_instance.badge_score = user.badge.deep_official_hs
+                    model_instance.full_clean()
+                    model_instance.save()
+                except TypeError as e:
+                    raise ValueError(f"Incorrect data format: {e}")
+                except ValidationError as e:
+                    raise ValueError(f"Validation error: {e}")
