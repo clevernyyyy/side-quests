@@ -13,7 +13,6 @@ export function RecentUploads({ data }) {
 
     useEffect(() => {        
         if (data.length) {
-            const numberToDisplay = 5;
             let sortedData = [...data];
 
             sortedData.sort((a, b) => {
@@ -46,7 +45,7 @@ export function RecentUploads({ data }) {
             });
 
             // Only display the top `numberToDisplay` entries
-            setRecentUploads(sortedData.slice(0, numberToDisplay));
+            setRecentUploads(sortedData);
         }
     }, [data]);
 
@@ -63,6 +62,7 @@ export function RecentUploads({ data }) {
                                 <th>Badge Time</th>
                                 <th>RoboRace Time</th>
                                 <th>Web (CTF)</th>
+                                <th>Escape Room</th>
                                 <th>Radio</th>
                                 <th>LockPicking</th>
                             </tr>
