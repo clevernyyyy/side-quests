@@ -24,7 +24,7 @@ function App() {
   // check for and store dark mode setting
   useEffect(() => {
     const storedTheme = localStorage.getItem('theme');
-    const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    const systemTheme = window.matchMedia('(prefers-color-scheme: light)').matches ? 'dark' : 'light';
     const initialTheme = storedTheme || systemTheme;
 
     setTheme(initialTheme);
