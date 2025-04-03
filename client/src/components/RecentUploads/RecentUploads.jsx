@@ -29,8 +29,8 @@ export function RecentUploads({ data }) {
                 }
 
                 // 3 If still tied, prioritize records with a roborace_score entered
-                const aHasRoboraceScore = a.roborace_score !== 0;
-                const bHasRoboraceScore = b.roborace_score !== 0;
+                const aHasRoboraceScore = a.roborace_easy_score !== 0;
+                const bHasRoboraceScore = b.roborace_easy_score !== 0;
                 if (aHasRoboraceScore !== bHasRoboraceScore) {
                     return bHasRoboraceScore - aHasRoboraceScore;
                 }
@@ -41,7 +41,7 @@ export function RecentUploads({ data }) {
                 }
 
                 // 5 If still tied, sort by lowest roborace_score
-                return a.roborace_score - b.roborace_score;
+                return a.roborace_easy_score - b.roborace_easy_score;
             });
 
             // Only display the top `numberToDisplay` entries
@@ -60,7 +60,8 @@ export function RecentUploads({ data }) {
                                 <th>Username</th>
                                 <th>Total Score</th>
                                 <th>Badge Time</th>
-                                <th>RoboRace Time</th>
+                                <th>RoboRace Easy</th>
+                                <th>RoboRace Hard</th>
                                 <th>Web (CTF)</th>
                                 <th>Escape Room</th>
                                 <th>Radio</th>

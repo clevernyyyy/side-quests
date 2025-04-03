@@ -16,7 +16,8 @@ export function RecentUploadsItem({ item }) {
                     <td>{item.username}</td>
                     <td>{item.computed_score}</td>
                     <td>{item.badge_score ? item.badge_score : ''}</td>
-                    <td>{item.roborace_score ? item.roborace_score : ''}</td>
+                    <td>{item.roborace_easy_score ? item.roborace_easy_score : ''}</td>
+                    <td>{item.roborace_hard_score ? item.roborace_hard_score : ''}</td>
                     <td>{item.web_score ? item.web_score : ''}</td>
                     <td>{item.escape_score ? item.escape_score : ''}</td>
                     <td>{item.radio_score ? item.radio_score : ''}</td>
