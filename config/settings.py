@@ -57,7 +57,6 @@ MIDDLEWARE = [
     'django.contrib.sessions.middleware.SessionMiddleware',
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
@@ -164,7 +163,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # debug True will send any requests for vite generated files to the vite webserver at the below ip/fqdn
 DJANGO_VITE = {
   "default": {
-    "dev_mode": DEBUG,
+    "dev_mode": False,
     "dev_server_host": os.environ.get("FQDN_OR_IP_WHERE_HOSTED")
   }
 }

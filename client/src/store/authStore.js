@@ -20,13 +20,12 @@ export const useAuthStore = create(
       },
 
       login: async (email, password) => {
-        const csrftoken = await get().setCsrfToken()
+        //const csrftoken = await get().setCsrfToken()
         const response = await fetch(location.protocol + '//' + location.host + '/api/login', {
           method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'X-CSRFToken': csrftoken,
-          },
+          //headers: {
+          //  'Content-Type': 'application/json',
+          //},
           body: JSON.stringify({
             email,
             password,
@@ -53,9 +52,9 @@ export const useAuthStore = create(
           const csrftoken = await get().setCsrfToken()
           const response = await fetch(location.protocol + '//' + location.host + '/api/logout', {
             method: 'POST',
-            headers: {
-              'X-CSRFToken': csrftoken,
-            },
+            //headers: {
+            //  'X-CSRFToken': csrftoken,
+            //},
             credentials: 'include',
           })
           if (response.ok) {
@@ -75,10 +74,10 @@ export const useAuthStore = create(
           const csrftoken = await get().setCsrfToken()
           const response = await fetch(location.protocol + '//' + location.host + '/api/user', {
             credentials: 'include',
-            headers: {
-              'Content-Type': 'application/json',
-              'X-CSRFToken': csrftoken,
-            },
+            //headers: {
+            //  'Content-Type': 'application/json',
+            //  'X-CSR
+            //},
           })
           if (response.ok) {
             const data = await response.json()
@@ -125,8 +124,8 @@ export const getCSRFToken = () => {
       }
     }
   }
-  if (cookieValue === null) {
+  /* if (cookieValue === null) {
     throw new Error('Missing CSRF cookie.')
-  }
+  } */
   return cookieValue
 }
