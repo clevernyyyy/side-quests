@@ -7,6 +7,7 @@ import './Login.css'; // Add custom styles if needed
 
 function Login() {
   const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const login = useAuthStore((state) => state.login);
@@ -15,7 +16,7 @@ function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
-    const success = await login(username, password);
+    const success = await login(email, password);
     if (success) {
       navigate('/');
     } else {
@@ -31,13 +32,13 @@ function Login() {
             <Card.Body>
               <h2 className="text-center mb-4">Login</h2>
               <Form onSubmit={handleSubmit}>
-                <Form.Group controlId="username" className="mb-3">
-                  <Form.Label>Username</Form.Label>
+                <Form.Group controlId="email" className="mb-3">
+                  <Form.Label>Email</Form.Label>
                   <Form.Control
                     type="text"
-                    placeholder="Enter your username"
-                    value={username}
-                    onChange={(e) => setUsername(e.target.value)}
+                    placeholder="Enter your email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
                     required
                   />
                 </Form.Group>

@@ -7,6 +7,7 @@ import './Register.css';
 
 function Register() {
   const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
@@ -21,7 +22,7 @@ function Register() {
           'Content-Type': 'application/json',
           'X-CSRFToken': getCSRFToken(),
         },
-        body: JSON.stringify({ username, password }),
+        body: JSON.stringify({ username, email, password }),
         credentials: 'include',
       });
       const data = await response.json();
@@ -51,6 +52,16 @@ function Register() {
                     placeholder="Enter your username"
                     value={username}
                     onChange={(e) => setUsername(e.target.value)}
+                    required
+                  />
+                </Form.Group>
+                <Form.Group controlId="email" className="mb-3">
+                  <Form.Label>Email</Form.Label>
+                  <Form.Control
+                    type="text"
+                    placeholder="Enter your email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
                     required
                   />
                 </Form.Group>
