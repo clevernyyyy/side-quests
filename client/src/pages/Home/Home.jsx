@@ -23,7 +23,7 @@ function Home() {
   const handleLogout = async () => {
     try {
       await logout()
-      navigate('/#/login')
+      navigate('/login')
     } catch (error) {
       console.error(error)
     }
@@ -64,7 +64,7 @@ function Home() {
       <Row className='my-4'>
         <Col xs={12} lg={{ span: 8, offset: 2 }}>
           <h2>hi</h2>
-          {/* <RecentUploads data={data} /> */}
+           <RecentUploads data={dataParam} /> 
         </Col>
       </Row>
 
