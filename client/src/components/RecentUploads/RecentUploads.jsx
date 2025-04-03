@@ -73,7 +73,7 @@ export function RecentUploads({ data }) {
                             ))}
                         </tbody>
                     </Table>
-                    <p><small><em>Please Note:</em> Each category completion is worth up to 5 points, with tie-breakers going to (1) doing the badge challenge, (2) doing the robo race challenge, (3) lowest badge time, and finally (4) lowest robo race time.</small></p>
+                    <p><small><em>Please Note:</em> Each category completion is worth up to 5 points, with tie-breakers going to (1) doing the badge challenge, (2) doing the robo race challenge, (3) lowest badge time, and finally (4) lowest robo race time. The badge score updates will occur every five minutes.</small></p>
                 </Card>
 
             </>
