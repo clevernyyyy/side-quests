@@ -16,7 +16,7 @@ export function RecentUploadsItem({ item }) {
         return (
             <>
                 <tr key={item.user}>
-                    <td>{item.user}</td>
+                    <td>{item.username}</td>
                     <td>{item.computed_score}</td>
                     <td>{item.badge_score ? item.badge_score : ''}</td>
                     <td>{item.web_score ? item.web_score : ''}</td>

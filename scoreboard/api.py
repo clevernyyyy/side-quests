@@ -27,14 +27,13 @@ def logout_view(request):
 
 @api.get("/user", auth=django_auth)
 def user(request):
-    secret_fact = (
-        "The moment one gives close attention to any thing, even a blade of grass",
-        "it becomes a mysterious, awesome, indescribably magnificent world in itself."
-    )
+    # secret_fact = (
+    #     "The moment one gives close attention to any thing, even a blade of grass",
+    #     "it becomes a mysterious, awesome, indescribably magnificent world in itself."
+    # )
     return {
         "username": request.user.username,
-        "email": request.user.email,
-        "secret_fact": secret_fact
+        "email": request.user.email
     }
 
 @api.post("/register")

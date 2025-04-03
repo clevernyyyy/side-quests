@@ -10,14 +10,11 @@ import { RecentUploadsItem } from '../RecentUploadsItem/RecentUploadsItem';
 
 export function RecentUploads({ data }) {
     const [recentUploads, setRecentUploads] = useState('');
-    console.log(data);
 
     useEffect(() => {        
         if (data.length) {
             const numberToDisplay = 5;
             let sortedDataByNew = [...data];
-
-            console.log(sortedDataByNew);
 
             // sort by newest first
             sortedDataByNew.sort((a, b) => new Date(b.updated) - new Date(a.updated));
@@ -48,7 +45,7 @@ export function RecentUploads({ data }) {
                     <Table className='mb-0'striped responsive>
                         <thead>
                             <tr>
-                                <th>User</th>
+                                <th>Username</th>
                                 <th>Total Score</th>
                                 <th>Badge Score</th>
                                 <th>Web Score</th>
