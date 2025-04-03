@@ -30,8 +30,7 @@ function Home({ data }) {
   }
 
   useEffect(() => {
-    // const params = useSearchParams();
-    const paramValue = decodeBase64Dict( searchParams.get('data') );
+    const paramValue = decodeBase64Dict(searchParams.get('data'));
     if (paramValue) {
       setDataParam(paramValue);
       setShowToast(true);
@@ -48,14 +47,17 @@ function Home({ data }) {
       const pythonDict = JSON.parse(decodedString);
       return pythonDict;
     } catch (error) {
-    //   console.error("Error decoding Base64 or parsing JSON:", error);
       return null;
     }
   }
 
   return (
     <>
-      <Banner />
+      <Row>
+        <Col xs={12}>
+          <Banner />
+        </Col>
+      </Row>
       <Row className='my-4'>
         <Col xs={12} lg={{ span: 8, offset: 2 }}>
            <RecentUploads data={data} /> 
@@ -67,11 +69,9 @@ function Home({ data }) {
           dataParam.success ? (
               <ContextualToast showToast={showToast} toggleShowToast={toggleShowToast} variant="secondary" message={dataParam.success} />
           ) : (
-              // no success or error
               <></>
           )      
       ) : (
-          // no data params sent
           <></>
       )}
     </>
