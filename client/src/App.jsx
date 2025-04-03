@@ -15,7 +15,7 @@ function App() {
   
   // toggle dark mode
   const toggleTheme = () => {
-    const newTheme = theme === 'light' ? 'dark' : 'light';
+    const newTheme = theme === 'light' ? 'light' : 'light';
     setTheme(newTheme);
     document.documentElement.setAttribute('data-bs-theme', newTheme);
     localStorage.setItem('theme', newTheme);
