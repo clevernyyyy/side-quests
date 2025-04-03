@@ -4,7 +4,7 @@ from django.conf import settings
 from django.db.models import Sum
 from django.db.models.functions import Coalesce
 from django.core.exceptions import ValidationError, ObjectDoesNotExist
-from .models import Badge
+from .models import Badge, Score
 
 import requests
 
@@ -62,3 +62,26 @@ def sync_badge_scores():
             print(f"Model saved with ID: {instance.id}")
         except ValueError as e:
             print(f"Error saving model: {e}")
+
+@shared_task
+def transfer_official_hs_to_score_table():
+    # pull all score instances and associated user's badge
+    scores = Score.objects.all()
+
+    for score in scores:
+        # iterate through each score record
+        
+        # look up badge for this score record's user
+        badge = Badge.objects.get(pk=score.user.badge.pk)
+
+        # set official hs to score instance badge_score
+        if badge.deep_official_hs is not None:
+            score.badge_score = badge.deep_official_hs
+
+        # save score record
+        score.save()
+
+
+    
+
+    # save
