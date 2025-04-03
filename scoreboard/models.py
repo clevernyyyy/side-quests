@@ -38,11 +38,9 @@ class CustomUser(AbstractUser):
 
 class Score(models.Model):
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
-    roborace_boolean = models.IntegerField(default=0)
     roborace_score = models.FloatField(default=0)
     web_score = models.IntegerField(default=0)
     escape_score = models.IntegerField(default=0)
-    badge_boolean = models.IntegerField(default=0)
     badge_score = models.FloatField(default=0) # deep_official_hs
     radio_score = models.IntegerField(default=0)
     lockpicking_score = models.IntegerField(default=0)
@@ -56,9 +54,9 @@ class Score(models.Model):
 def calculate_score(sender, instance, created, **kwargs):
     if created:
         added_boolean_points = 0
-        if instance.roborace_boolean != 0:
+        if instance.roborace_score > 0:
             added_boolean_points += 5
-        if instance.badge_boolean !=0:
+        if instance.badge_score > 0:
             added_boolean_points += 5
 
         instance.computed_score = added_boolean_points + instance.web_score + instance.escape_score + instance.radio_score + instance.lockpicking_score

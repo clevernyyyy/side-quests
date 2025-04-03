@@ -8,10 +8,7 @@ import './RecentUploadsItem.css';
 
 
 
-export function RecentUploadsItem({ item }) {
-    
-
-  
+export function RecentUploadsItem({ item }) {  
     if (item.computed_score) {
         return (
             <>
@@ -19,7 +16,10 @@ export function RecentUploadsItem({ item }) {
                     <td>{item.username}</td>
                     <td>{item.computed_score}</td>
                     <td>{item.badge_score ? item.badge_score : ''}</td>
+                    <td>{item.roborace_score ? item.roborace_score : ''}</td>
                     <td>{item.web_score ? item.web_score : ''}</td>
+                    <td>{item.radio_score ? item.radio_score : ''}</td>
+                    <td>{item.lockpicking_score ? item.lockpicking_score : ''}</td>
                 </tr>
 
             </>

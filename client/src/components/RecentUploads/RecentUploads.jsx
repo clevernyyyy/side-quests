@@ -14,28 +14,41 @@ export function RecentUploads({ data }) {
     useEffect(() => {        
         if (data.length) {
             const numberToDisplay = 5;
-            let sortedDataByNew = [...data];
+            let sortedData = [...data];
 
-            // sort by newest first
-            sortedDataByNew.sort((a, b) => new Date(b.updated) - new Date(a.updated));
-            // console.log("new");
-            // console.log(sortedDataByNew);
+            sortedData.sort((a, b) => {
+                // 1 Sort by computed_score (higher is better)
+                if (b.computed_score !== a.computed_score) {
+                    return b.computed_score - a.computed_score;
+                }
 
-            // don't display uploads with no associated high scores
-            let sortedDataByNewAndFilteredOutNull = sortedDataByNew.filter(function(v, i) {
-                return ( (v["badge_score"] != null || v["web_score"] != null) );
-              });
+                // 2 If tied, prioritize records with a badge_score entered
+                const aHasBadgeScore = a.badge_score !== 0;
+                const bHasBadgeScore = b.badge_score !== 0;
+                if (aHasBadgeScore !== bHasBadgeScore) {
+                    return bHasBadgeScore - aHasBadgeScore;
+                }
 
-            // only display top <numberToDisplay>
-            let reducedData = sortedDataByNewAndFilteredOutNull.slice(0, numberToDisplay);
+                // 3 If still tied, prioritize records with a roborace_score entered
+                const aHasRoboraceScore = a.roborace_score !== 0;
+                const bHasRoboraceScore = b.roborace_score !== 0;
+                if (aHasRoboraceScore !== bHasRoboraceScore) {
+                    return bHasRoboraceScore - aHasRoboraceScore;
+                }
 
+                // 4 If still tied, sort by lowest badge_score
+                if (a.badge_score !== b.badge_score) {
+                    return a.badge_score - b.badge_score;
+                }
 
-            // console.log(reducedData);
+                // 5 If still tied, sort by lowest roborace_score
+                return a.roborace_score - b.roborace_score;
+            });
 
-            setRecentUploads(reducedData);
+            // Only display the top `numberToDisplay` entries
+            setRecentUploads(sortedData.slice(0, numberToDisplay));
         }
-    
-      }, [data])
+    }, [data]);
 
     if (recentUploads.length) {
         return (
@@ -47,8 +60,11 @@ export function RecentUploads({ data }) {
                             <tr>
                                 <th>Username</th>
                                 <th>Total Score</th>
-                                <th>Badge Score</th>
-                                <th>Web Score</th>
+                                <th>Badge Time</th>
+                                <th>RoboRace Time</th>
+                                <th>Web (CTF)</th>
+                                <th>Radio</th>
+                                <th>LockPicking</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -57,6 +73,7 @@ export function RecentUploads({ data }) {
                             ))}
                         </tbody>
                     </Table>
+                    <p><small><em>Please Note:</em> Each category completion is worth up to 5 points, with tie-breakers going to (1) doing the badge challenge, (2) doing the robo race challenge, (3) lowest badge time, and finally (4) lowest robo race time.</small></p>
                 </Card>
 
             </>
@@ -66,6 +83,7 @@ export function RecentUploads({ data }) {
             <>
                 <Card as="h4" className="text-center">
                     <Card.Header>Top Side Quest Scores</Card.Header>
+                    <p><em>Please Note:</em> Each category completion is worth up to 5 points, with tie-breakers going to (1) doing the badge challenge, (2) doing the robo race challenge, (3) lowest badge time, and finally (4) lowest robo race time.</p>
                     <ListGroup variant='flush'>        
                         <ListGroup.Item>None</ListGroup.Item>
                     </ListGroup>
