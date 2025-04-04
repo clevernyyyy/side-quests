@@ -110,7 +110,8 @@ def transfer_official_hs_to_score_table():
                 try:
                     model_instance = Score()
                     model_instance.user = custom_user
-                    model_instance.badge_score = custom_user.badge.deep_official_hs
+                    if custom_user.badge.deep_official_hs is not None:
+                        model_instance.badge_score = custom_user.badge.deep_official_hs
                     model_instance.full_clean()
                     model_instance.save()
                 except TypeError as e:
