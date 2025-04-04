@@ -85,28 +85,32 @@ def transfer_official_hs_to_score_table_old():
 @shared_task
 def transfer_official_hs_to_score_table():
     #pull all users
-    users = CustomUser.objects.all()
+    custom_users = CustomUser.objects.all()
 
     #loop through users
-    for user in users:
+    for custom_user in custom_users:
 
         #if user have badge?
-        if user.badge is not None:
+        if custom_user.badge is not None:
 
             #if user has score, update it else, create new score
             try:
-                score = Score.objects.get(user=score.user)
+                score = Score.objects.get(user=custom_user)
                 # score exists
 
                 #set official hs to score instance badge_score
-                if user.badge.deep_official_hs is not None:
-                    score.badge_score = user.badge.deep_official_hs
+                if custom_user.badge.deep_official_hs is not None:
+                    score.badge_score = custom_user.badge.deep_official_hs
+
+                    # save score record
+                    score.save()
 
             except ObjectDoesNotExist:
                 #score doesn't exist.  create new
                 try:
                     model_instance = Score()
-                    model_instance.badge_score = user.badge.deep_official_hs
+                    model_instance.user = custom_user
+                    model_instance.badge_score = custom_user.badge.deep_official_hs
                     model_instance.full_clean()
                     model_instance.save()
                 except TypeError as e:
